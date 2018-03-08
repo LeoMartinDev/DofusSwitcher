@@ -181,7 +181,6 @@ private:
     int _id;
     std::string _mainWindowTitle;
     int _mainWindowHandle;
-    gcroot<Diagnostics::Process^> _process;
 };
 
 

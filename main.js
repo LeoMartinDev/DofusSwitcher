@@ -9,7 +9,8 @@ function createWindow () {
     //win = new BrowserWindow({width: 800, height: 600})
 
     // and load the index.html of the app.
-    let dofusAccounts = addon.getProcessesByName("Dofus")
+    let dofusAccounts = addon.getProcessById(412452)
+    console.log(dofusAccounts)
     let i = 0;
     globalShortcut.register('CommandOrControl+X', () => {
         dofusAccounts[i].setToForeground();
