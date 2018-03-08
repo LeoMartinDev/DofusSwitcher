@@ -1,107 +1,202 @@
-#include <nan.h>
-#include <node.h>
-#include <v8.h>
 #include "nan.h"
-//#include "ProcessHelper.h";
+#include <nan.h>
+#include <v8.h>
+#include <map>
+#include <msclr\marshal_cppstd.h>
+#include <windows.h>
 
+#pragma unmanaged
 #using <mscorlib.dll>
-
-#include <iterator>
-#include <vector>
-
 #using <System.dll>
+
 using namespace System;
 
 #pragma managed
 
-namespace AukSwitcher {
+namespace Helpers {
 
-    // NAN_METHOD is a Nan macro enabling convenient way of creating native node functions.
-// It takes a method's name as a param. By C++ convention, I used the Capital cased name.
-/*    NAN_METHOD(GetProcesses) {
-*//*        std::vector<double> vec = { 5, 6, 7 };
-        v8::Local<v8::Array> jsArr = Nan::New<v8::Array>(vec.size());
-        for (int i = 0; i < jsArr->Length(); i++) {
-            double number = vec.at(i);
-            v8::Local<v8::Value> jsElement = Nan::New(number);
-            jsArr->Set(i, jsElement);
-        }
-        info.GetReturnValue().Set(jsArr);*//*
-        std::vector<int> processes = Helpers::GetProcesses();
-        v8::Local<v8::Array> jsArr = Nan::New<v8::Array>(processes.size());
+    struct RawProcess {
+        int handle;
+        int id;
+        std::string mainWindowTitle;
+        int mainWindowHandle;
+    };
 
-        for (int i = 0; i < jsArr->Length(); i++) {
-            int number = processes.at(i);
-            v8::Local<v8::Value> jsElement = Nan::New(number);
-            jsArr->Set(i, jsElement);
-        }
-        info.GetReturnValue().Set(jsArr);
-    };*/
+    std::vector <RawProcess> GetProcessesByName(const std::string &name) {
+        String ^ processName = gcnew String(name.c_str());
+        array < Diagnostics::Process ^>^processesArray = Diagnostics::Process::GetProcessesByName(processName);
+        std::vector <RawProcess> processesVector = std::vector<RawProcess>();
 
-    std::vector<int> GetP() {
-        array < Diagnostics::Process ^>^processesArray = Diagnostics::Process::GetProcessesByName("Dofus");
-        std::vector<int> test = std::vector<int>();
-
-        for (unsigned int i = 0; i <= sizeof(&processesArray) / sizeof(Diagnostics::Process^); i++)
-        {
+        for (unsigned int i = 0; i < processesArray->Length; i++) {
             System::Console::WriteLine(processesArray[i]->MainWindowTitle);
-            test.push_back(processesArray[i]->Id);
+            std::string mainWindowTitle = msclr::interop::marshal_as<std::string>(processesArray[i]->MainWindowTitle);
+            RawProcess result = {
+                    processesArray[i]->Handle.ToInt32(),
+                    processesArray[i]->Id,
+                    mainWindowTitle,
+                    processesArray[i]->MainWindowHandle.ToInt32(),
+            };
+            processesVector.push_back(result);
         }
-        System::Console::WriteLine(test.size());
-        return test;
+        System::Console::WriteLine(processesVector.size());
+        return processesVector;
     }
 
-    int GetAll() {
-        array < Diagnostics::Process ^>^processesArray = Diagnostics::Process::GetProcesses();
-        std::vector<int> test;
-
-        for (unsigned int i = 0; i < sizeof(processesArray) / sizeof(processesArray[0]); i++)
-        {
-            test.push_back(processesArray[i]->Id);
-        }
-        return test.at(0);
+    RawProcess GetCurrentProcess() {
+        Diagnostics::Process ^currentProcess = Diagnostics::Process::GetCurrentProcess();
+        std::string mainWindowTitle = msclr::interop::marshal_as<std::string>(currentProcess->MainWindowTitle);
+        RawProcess result = {
+                currentProcess->Handle.ToInt32(),
+                currentProcess->Id,
+                mainWindowTitle,
+                currentProcess->MainWindowHandle.ToInt32(),
+        };
+        System::Console::Write(currentProcess->MainWindowTitle);
+        return result;
     }
+}
 
 #pragma unmanaged
 
-    NAN_METHOD(GetProcesses) {
-        std::vector<int> processes = GetP();
-        v8::Local<v8::Array> jsArr = Nan::New<v8::Array>(processes.size());
-        for (int i = 0; i < processes.size(); i++) {
-            int number = processes.at(i);
-            v8::Local<v8::Value> jsElement = Nan::New(number);
-            jsArr->Set(i, jsElement);
-        }
-        info.GetReturnValue().Set(jsArr);
-/*        int processes = GetAll();
-        info.GetReturnValue().Set(processes);*/
-    }
-/*    NAN_METHOD(GetProcesses) {
-*//*        std::vector<double> vec = { 5, 6, 7 };
-        v8::Local<v8::Array> jsArr = Nan::New<v8::Array>(vec.size());
-        for (int i = 0; i < jsArr->Length(); i++) {
-            double number = vec.at(i);
-            v8::Local<v8::Value> jsElement = Nan::New(number);
-            jsArr->Set(i, jsElement);
-        }
-        info.GetReturnValue().Set(jsArr);*//*
-        array<int>^ processes = Helpers::GetProcesses();
-        v8::Local<v8::Array> jsArr = Nan::New<v8::Array>(processes.size());
+class Process : public Nan::ObjectWrap {
 
-        for (int i = 0; i < jsArr->Length(); i++) {
-            int number = processes[i];
-            v8::Local<v8::Value> jsElement = Nan::New(number);
-            jsArr->Set(i, jsElement);
-        }
-        info.GetReturnValue().Set(jsArr);
-    };*/
+public:
+    static NAN_MODULE_INIT(Init) {
+        v8::Local <v8::FunctionTemplate> tpl = Nan::New<v8::FunctionTemplate>(New);
+        tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
-// Module initialization logic
-    NAN_MODULE_INIT(Initialize) {
-        // Export the `Hello` function (equivalent to `export function Hello (...)` in JS)
-        NAN_EXPORT(target, GetProcesses);
+        Nan::SetPrototypeMethod(tpl, "setToForeground", setToForeground);
+
+        Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("handle").ToLocalChecked(), Process::HandleGetters);
+        Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("id").ToLocalChecked(), Process::HandleGetters);
+        Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("mainWindowTitle").ToLocalChecked(), Process::HandleGetters,
+                         nullptr);
+        Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("mainWindowHandle").ToLocalChecked(), Process::HandleGetters,
+                         nullptr);
+
+        constructor().Reset(Nan::GetFunction(tpl).ToLocalChecked());
     };
 
-// Create the module called "addon" and initialize it with `Initialize` function (created with NAN_MODULE_INIT macro)
-    NODE_MODULE(addon, Initialize);
+    static NAN_METHOD(GetCurrent) {
+        v8::Local <v8::Function> cons = Nan::New(constructor());
+        Helpers::RawProcess value = Helpers::GetCurrentProcess();
+        const int argc = 4;
+        v8::Local <v8::Value> argv[argc] = {Nan::New(value.handle), Nan::New(value.id),
+                                            Nan::New(value.mainWindowTitle.c_str()).ToLocalChecked(),
+                                            Nan::New(value.mainWindowHandle)};
+        info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
+    };
+
+    static NAN_METHOD(GetByName) {
+        v8::Local <v8::Function> cons = Nan::New(constructor());
+        v8::String::Utf8Value processName(info[0]);
+        std::vector <Helpers::RawProcess> value = Helpers::GetProcessesByName(std::string(*processName));
+        v8::Local <v8::Array> jsProcessesArray = Nan::New<v8::Array>(value.size());
+
+        for (unsigned int i = 0; i < jsProcessesArray->Length(); i++) {
+            const int argc = 4;
+            v8::Local <v8::Value> argv[argc] = {Nan::New(value.at(i).handle), Nan::New(value.at(i).id),
+                                                Nan::New(value.at(i).mainWindowTitle.c_str()).ToLocalChecked(),
+                                                Nan::New(value.at(i).mainWindowHandle)};
+            v8::Local <v8::Object> instance = Nan::NewInstance(cons, argc, argv).ToLocalChecked();
+
+            jsProcessesArray->Set(i, instance);
+        }
+        info.GetReturnValue().Set(jsProcessesArray);
+    };
+
+    static NAN_GETTER(HandleGetters) {
+        Process *self = Nan::ObjectWrap::Unwrap<Process>(info.This());
+
+        std::string propertyName = std::string(*Nan::Utf8String(property));
+        if (propertyName == "handle") {
+            info.GetReturnValue().Set(self->handle());
+        } else if (propertyName == "id") {
+            info.GetReturnValue().Set(self->id());
+        } else if (propertyName == "mainWindowTitle") {
+            info.GetReturnValue().Set(Nan::New(self->mainWindowTitle().c_str()).ToLocalChecked());
+        } else if (propertyName == "mainWindowHandle") {
+            info.GetReturnValue().Set(self->mainWindowHandle());
+        } else {
+            info.GetReturnValue().Set(Nan::Undefined());
+        }
+    };
+
+    inline int handle() const {
+        return _handle;
+    }
+
+    inline int id() const {
+        return _id;
+    }
+
+    inline std::string mainWindowTitle() const {
+        return _mainWindowTitle;
+    }
+
+    inline int mainWindowHandle() const {
+        return _mainWindowHandle;
+    }
+
+private:
+    explicit Process(int handle, int id, std::string mainWindowTitle, int mainWindowHandle) : _handle(handle), _id(id),
+                                                                                              _mainWindowTitle(
+                                                                                                      mainWindowTitle),
+                                                                                              _mainWindowHandle(
+                                                                                                      mainWindowHandle) {}
+
+    ~Process() {}
+
+    static NAN_METHOD(New) {
+        if (info.IsConstructCall()) {
+            int handle = Nan::To<int>(info[0]).FromJust();
+            int value = Nan::To<int>(info[1]).FromJust();
+            v8::String::Utf8Value mainWindowTitle(info[2]->ToString());
+            int mainWindowHandle = Nan::To<int>(info[3]).FromJust();
+
+            Process *obj = new Process(handle, value, *mainWindowTitle, mainWindowHandle);
+            obj->Wrap(info.This());
+            info.GetReturnValue().Set(info.This());
+        } else {
+            const int argc = 4;
+
+            v8::Local <v8::Value> argv[argc] = {info[0], info[1], info[2], info[3]};
+            v8::Local <v8::Function> cons = Nan::New(constructor());
+            info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
+        }
+    };
+
+    static NAN_METHOD(setToForeground) {
+        Process *obj = Nan::ObjectWrap::Unwrap<Process>(info.Holder());
+
+        SetForegroundWindow((HWND) obj->_mainWindowHandle);
+    };
+
+    static inline Nan::Persistent<v8::Function> &constructor() {
+        static Nan::Persistent<v8::Function> construct;
+        return construct;
+    };
+
+    int _handle;
+    int _id;
+    std::string _mainWindowTitle;
+    int _mainWindowHandle;
+    gcroot<Diagnostics::Process^> _process;
+};
+
+
+NAN_MODULE_INIT(Init) {
+    Process::Init(target);
+    Nan::Set(target,
+             Nan::New<v8::String>("getCurrentProcess").ToLocalChecked(),
+             Nan::GetFunction(
+                     Nan::New<v8::FunctionTemplate>(Process::GetCurrent)).ToLocalChecked()
+    );
+    Nan::Set(target,
+             Nan::New<v8::String>("getProcessesByName").ToLocalChecked(),
+             Nan::GetFunction(
+                     Nan::New<v8::FunctionTemplate>(Process::GetByName)).ToLocalChecked()
+    );
 }
+
+NODE_MODULE(ProcessFactory, Init)

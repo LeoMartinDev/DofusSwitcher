@@ -9,8 +9,8 @@
     "build": "node-gyp build --target=1.7.3 --target_platform=win32 --arch=x64",
     "configure": "node-gyp configure",
     "clean": "node-gyp clean",
-    "node-gyp:rebuild": "node-gyp rebuild --target=1.7.3 --target_platform=win32 --arch=x64 --dist-url=https://atom.io/download/electron",
-    "electron:rebuild": "./node_modules/.bin/electron-rebuild --target=1.7.3 --target_platform=win32 --arch=x64",
+    "node-gyp:rebuild": "node-gyp rebuild --target=1.8.3 --target_platform=win32 --arch=x64 --dist-url=https://atom.io/download/electron --msvs_version=2017",
+    "electron:rebuild": "./node_modules/.bin/electron-rebuild",
     "electron:start": "./node_modules/.bin/electron main.js",
     "start": "npm run electron:rebuild && npm run electron:start"
   },

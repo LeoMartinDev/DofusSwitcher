@@ -1,4 +1,4 @@
-//#include "nan.h"
+#include "nan.h"
 #include <nan.h>
 #include <v8.h>
 #include <map>
@@ -27,7 +27,7 @@ namespace Helpers {
         array < Diagnostics::Process ^>^processesArray = Diagnostics::Process::GetProcessesByName(processName);
         std::vector <RawProcess> processesVector = std::vector<RawProcess>();
 
-        for (unsigned int i = 0; i <= sizeof(&processesArray) / sizeof(Diagnostics::Process ^ ); i++) {
+        for (unsigned int i = 0; i < processesArray->Length; i++) {
             System::Console::WriteLine(processesArray[i]->MainWindowTitle);
             std::string mainWindowTitle = msclr::interop::marshal_as<std::string>(processesArray[i]->MainWindowTitle);
             RawProcess result = {
@@ -181,6 +181,7 @@ private:
     int _id;
     std::string _mainWindowTitle;
     int _mainWindowHandle;
+    gcroot<Diagnostics::Process^> _process;
 };
 
 
