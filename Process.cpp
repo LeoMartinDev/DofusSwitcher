@@ -2,17 +2,17 @@
 // Created by leoma on 02/03/2018.
 //
 
-#include "Process.h"
+#include "Process.cc"
 
 namespace AukSwitcher {
-
-    Nan::Persistent<v8::FunctionTemplate> Process::constructor;
 
     Process::Process(IntPtr handle) {
         this->handle = handle;
     }
 
     Process::~Process() {}
+
+    Nan::Persistent<v8::FunctionTemplate> Process::constructor;
 
     NAN_MODULE_INIT(Process::Init) {
         v8::Local <v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(Process::New);
@@ -29,7 +29,7 @@ namespace AukSwitcher {
 
     NAN_METHOD(Process::New) {
         if (info.IsConstructCall()) {
-            Process *obj = new Process((IntPtr)info[0]->IntegerValue());
+            Process *obj = new Process((IntPtr)info[0]);
             obj->Wrap(info.Holder());
             info.GetReturnValue().Set(info.Holder());
         } else {

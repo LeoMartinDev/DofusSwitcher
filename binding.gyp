@@ -6,9 +6,7 @@
       ],
       "target_name": "addon",
       "sources": [
-        "main.cpp",
-        "ProcessHelper.cpp",
-        "Process.cpp"
+        "Process.cc"
       ],
       "msbuild_settings": {
         "ClCompile": {

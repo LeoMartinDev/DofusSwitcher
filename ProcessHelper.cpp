@@ -1,10 +1,13 @@
 #include "ProcessHelper.h"
 
 namespace Helpers {
-    int GetCurrentProcess() {
+    v8::Local<v8::Object> GetCurrentProcess() {
         Diagnostics::Process ^currentProcess = Diagnostics::Process::GetCurrentProcess();
+        v8::Local<v8::Function> cons = Nan::New(AukSwitcher::Process::constructor);
+        const int argc = 1;
 
-        return currentProcess->Id;
+        v8::Local<v8::Value> argv[1] = {Nan::New((int)currentProcess->Handle.ToInt32())};
+        return Nan::NewInstance(cons, argc, argv).ToLocalChecked();
     }
 
     std::vector<int> GetProcessesByName(const std::string& name) {

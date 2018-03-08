@@ -44,11 +44,11 @@ namespace AukSwitcher {
     }
 
     NAN_METHOD(GetCurrentProcess) {
-        int process = Helpers::GetCurrentProcess();
-        v8::Local <v8::Function> cons = Nan::New(Process::constructor)->GetFunction();
+        v8::Local<v8::Object> process = Helpers::GetCurrentProcess();
+/*        v8::Local <v8::Function> cons = Nan::New(Process::constructor)->GetFunction();
 
-        v8::Local<v8::Object> jsSumVec = cons->NewInstance(0, nullptr);
-        info.GetReturnValue().Set(jsSumVec);
+        v8::Local<v8::Object> jsSumVec = cons->NewInstance(0, nullptr);*/
+        info.GetReturnValue().Set(process);
     }
 
 // Module initialization logic

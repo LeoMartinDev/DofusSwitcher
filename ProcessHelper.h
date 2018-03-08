@@ -5,7 +5,7 @@
 #ifndef NODEJSNATIVEADDON_PROCESSHELPER_H
 #define NODEJSNATIVEADDON_PROCESSHELPER_H
 
-#include "Process.h"
+#include "Process.cc"
 
 #include <iterator>
 #include <vector>
@@ -23,7 +23,7 @@ namespace Helpers {
 /*    AukSwitcher::Process* GetCurrentProcess();*/
     /*std::vector<int> GetProcesses();*/
     std::vector<int> GetProcessesByName(const std::string&);
-    int GetCurrentProcess();
+    v8::Local<v8::Object> GetCurrentProcess();
 }
 
 #endif //NODEJSNATIVEADDON_PROCESSHELPER_H
