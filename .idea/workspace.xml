@@ -10,25 +10,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2ba0b0d-52ad-47e8-b529-bb4fb06a8a84" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/GetCurrentProcessWorker.cpp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/GetCurrentProcessWorker.h" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Helpers.cpp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Helpers.h" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Process.cpp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Process.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/GetCurrentProcessWorker.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/GetCurrentProcessWorker.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/Helpers.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/Helpers.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/Process.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/Process.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/ProcessHelper.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/ProcessHelper.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/WinCtlWindow.cc" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/WinCtlWindow.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/WinCtlWrap.cc" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/bk.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/main.cpp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/nan.h" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/srcBackup/oldProcess.cpp.bk" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Process.cc" afterPath="$PROJECT_DIR$/src/bk.cpp" />
-      <change beforePath="$PROJECT_DIR$/Process.cpp" afterPath="$PROJECT_DIR$/src/oldProcess.cpp.bk" />
-      <change beforePath="$PROJECT_DIR$/ProcessHelper.cpp" afterPath="$PROJECT_DIR$/src/ProcessHelper.cpp" />
-      <change beforePath="$PROJECT_DIR$/ProcessHelper.h" afterPath="$PROJECT_DIR$/src/ProcessHelper.h" />
-      <change beforePath="$PROJECT_DIR$/WinCtlWindow.cc" afterPath="$PROJECT_DIR$/src/WinCtlWindow.cc" />
-      <change beforePath="$PROJECT_DIR$/WinCtlWindow.h" afterPath="$PROJECT_DIR$/src/WinCtlWindow.h" />
-      <change beforePath="$PROJECT_DIR$/WinCtlWrap.cc" afterPath="$PROJECT_DIR$/src/WinCtlWrap.cc" />
-      <change beforePath="$PROJECT_DIR$/binding.gyp" afterPath="$PROJECT_DIR$/binding.gyp" />
-      <change beforePath="$PROJECT_DIR$/bk.cpp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
-      <change beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
-      <change beforePath="$PROJECT_DIR$/nan.h" afterPath="$PROJECT_DIR$/src/nan.h" />
+      <change beforePath="$PROJECT_DIR$/src/GetCurrentProcessWorker.cpp" afterPath="$PROJECT_DIR$/src/GetCurrentProcessWorker.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/GetCurrentProcessWorker.h" afterPath="$PROJECT_DIR$/src/GetCurrentProcessWorker.h" />
+      <change beforePath="$PROJECT_DIR$/src/Process.cpp" afterPath="$PROJECT_DIR$/src/Process.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/Process.h" afterPath="$PROJECT_DIR$/src/Process.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,31 +43,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="WinCtlWindow.cc" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.cc">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-414">
-                  <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="ProcessHelper.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ProcessHelper.cpp">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="322">
                   <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="oldProcess.cpp.bk" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/oldProcess.cpp.bk">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="322">
-                  <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
                   <folding />
                 </state>
               </provider>
@@ -112,21 +93,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Process.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Process.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1978">
-                  <caret line="22" column="67" lean-forward="false" selection-start-line="22" selection-start-column="67" selection-end-line="22" selection-end-column="67" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="GetCurrentProcessWorker.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/GetCurrentProcessWorker.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="138">
-                  <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="16" />
+                <state relative-caret-position="69">
+                  <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="62" />
                   <folding />
                 </state>
               </provider>
@@ -142,15 +113,55 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="WinCtlWindow.cc" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.cc">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="69">
+                  <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="50" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Process.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Process.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="213">
+                  <caret line="33" column="67" lean-forward="false" selection-start-line="33" selection-start-column="67" selection-end-line="33" selection-end-column="67" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GetCurrentProcessWorker.h" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/GetCurrentProcessWorker.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="184">
+                  <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="ProcessHelper.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/ProcessHelper.h">
+        <leaf>
+          <file leaf-file-name="Process.h" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Process.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="575">
-                  <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+                <state relative-caret-position="463">
+                  <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GetCurrentProcessWorker.h" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/GetCurrentProcessWorker.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="437">
+                  <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -159,38 +170,8 @@
           <file leaf-file-name="WinCtlWindow.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="759">
-                  <caret line="33" column="4" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="43" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="GetCurrentProcessWorker.h" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/GetCurrentProcessWorker.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Process.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Process.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="414">
-                  <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Helpers.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Helpers.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="506">
-                  <caret line="22" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="23" selection-end-column="15" />
+                <state relative-caret-position="322">
+                  <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="53" />
                   <folding />
                 </state>
               </provider>
@@ -227,6 +208,11 @@
       <find>~Process</find>
       <find>class</find>
       <find>Callback</find>
+      <find>Object</find>
+      <find>Factory</find>
+      <find>constructor</find>
+      <find>constructor()</find>
+      <find>Nan::New(co</find>
     </findStrings>
     <replaceStrings>
       <replace>_handle</replace>
@@ -261,8 +247,9 @@
         <option value="$PROJECT_DIR$/Helpers.cpp" />
         <option value="$PROJECT_DIR$/binding.gyp" />
         <option value="$PROJECT_DIR$/main.js" />
-        <option value="$PROJECT_DIR$/src/Process.cpp" />
+        <option value="$PROJECT_DIR$/src/Process.h" />
         <option value="$PROJECT_DIR$/src/GetCurrentProcessWorker.h" />
+        <option value="$PROJECT_DIR$/src/Process.cpp" />
         <option value="$PROJECT_DIR$/src/GetCurrentProcessWorker.cpp" />
       </list>
     </option>
@@ -329,6 +316,9 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\Lab\NodejsNativeAddon" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Documents\Lab\NodejsNativeAddon" />
       <recent name="D:\Documents\Lab\NodejsNativeAddon\src" />
@@ -366,7 +356,7 @@
       <workItem from="1520441650923" duration="8721000" />
       <workItem from="1520454049618" duration="1115000" />
       <workItem from="1520462064388" duration="19847000" />
-      <workItem from="1520535574442" duration="15665000" />
+      <workItem from="1520535574442" duration="20562000" />
     </task>
     <task id="LOCAL-00001" summary="Hmm">
       <created>1520525931466</created>
@@ -389,16 +379,23 @@
       <option name="project" value="LOCAL" />
       <updated>1520549615498</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="youpi">
+      <created>1520597272518</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1520597272518</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65926000" />
+    <option name="totallyTimeSpent" value="70823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09062254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09062254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15256917" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -427,7 +424,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07289204" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09062254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980299" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -454,14 +451,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ProcessHelper.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -717,30 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/nan.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="189" column="31" lean-forward="false" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProcessHelper.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="759">
-          <caret line="33" column="4" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/Release/addon.node">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -761,14 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="11" column="156" lean-forward="false" selection-start-line="11" selection-start-column="156" selection-end-line="11" selection-end-column="156" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helpers.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="23" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -797,10 +754,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.cc">
+    <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
+        <state relative-caret-position="161">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nan.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="1411" column="8" lean-forward="false" selection-start-line="1411" selection-start-column="8" selection-end-line="1411" selection-end-column="8" />
+          <folding>
+            <element signature="e#6247#6271#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ProcessHelper.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -813,42 +788,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/srcBackup/nan.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="47" lean-forward="false" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helpers.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="23" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Process.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Process.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1978">
-          <caret line="22" column="67" lean-forward="false" selection-start-line="22" selection-start-column="67" selection-end-line="22" selection-end-column="67" />
+        <state relative-caret-position="463">
+          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GetCurrentProcessWorker.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state relative-caret-position="184">
+          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WinCtlWindow.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Process.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="33" column="67" lean-forward="false" selection-start-line="33" selection-start-column="67" selection-end-line="33" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GetCurrentProcessWorker.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="16" />
+        <state relative-caret-position="69">
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="62" />
           <folding />
         </state>
       </provider>

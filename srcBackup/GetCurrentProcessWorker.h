@@ -15,7 +15,7 @@
 
 class GetCurrentProcessWorker : public Nan::AsyncWorker {
 public:
-    GetCurrentProcessWorker(Nan::Callback *callback);
+    GetCurrentProcessWorker(Nan::Callback *callback, v8::Local <v8::Function> constructor);
     ~GetCurrentProcessWorker();
 
     void Execute();

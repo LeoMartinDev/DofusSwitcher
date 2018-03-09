@@ -29,8 +29,7 @@ public:
     inline int id() const;
     inline std::string mainWindowTitle() const;
     inline int mainWindowHandle() const;
-    //static inline Nan::Persistent<v8::Function> &constructor();
-    static Nan::Persistent<v8::Function> constructor;
+    static inline Nan::Persistent<v8::Function> &constructor();
 
 private:
     explicit Process(int handle, int id, std::string mainWindowTitle, int mainWindowHandle);

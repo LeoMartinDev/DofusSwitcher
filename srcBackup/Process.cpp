@@ -1,7 +1,5 @@
 #include "Process.h"
 
-Nan::Persistent<v8::Function> Process::constructor;
-
 NAN_MODULE_INIT(Process::Init) {
     v8::Local <v8::FunctionTemplate> tpl = Nan::New<v8::FunctionTemplate>(New);
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
@@ -15,11 +13,11 @@ NAN_MODULE_INIT(Process::Init) {
     Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("mainWindowHandle").ToLocalChecked(), Process::HandleGetters,
                      nullptr);
 
-    constructor.Reset(Nan::GetFunction(tpl).ToLocalChecked());
+    constructor().Reset(Nan::GetFunction(tpl).ToLocalChecked());
 };
 
 NAN_METHOD(Process::GetCurrent) {
-    v8::Local <v8::Function> cons = Nan::New(constructor);
+    v8::Local <v8::Function> cons = Nan::New(constructor());
     Helpers::RawProcess value = Helpers::GetCurrentProcess();
     const int argc = 4;
     v8::Local <v8::Value> argv[argc] = {Nan::New(value.handle), Nan::New(value.id),
@@ -33,7 +31,7 @@ NAN_METHOD(Process::GetByName) {
     if (!info[0]->IsString()) {
         return Nan::ThrowError(Nan::New("Process::GetByName - name must be a string!").ToLocalChecked());
     }
-    v8::Local <v8::Function> cons = Nan::New(constructor);
+    v8::Local <v8::Function> cons = Nan::New(constructor());
     v8::String::Utf8Value processName(info[0]);
     std::vector <Helpers::RawProcess> value = Helpers::GetProcessesByName(std::string(*processName));
     v8::Local <v8::Array> jsProcessesArray = Nan::New<v8::Array>(value.size());
@@ -54,7 +52,7 @@ NAN_METHOD(Process::GetById) {
     if (!info[0]->IsNumber()) {
         return Nan::ThrowError(Nan::New("Process::GetById - id must be a number!").ToLocalChecked());
     }
-    v8::Local <v8::Function> cons = Nan::New(constructor);
+    v8::Local <v8::Function> cons = Nan::New(constructor());
     int id = info[0]->NumberValue();
     try {
         Helpers::RawProcess value = Helpers::GetProcessById(id);
@@ -74,11 +72,11 @@ NAN_METHOD(Process::GetCurrentAsync) {
     if(!info[0]->IsFunction()) {
         return Nan::ThrowError(Nan::New("expected arg 1: function callback").ToLocalChecked());
     }
-/*    v8::Local <v8::Function> cons = Nan::New(constructor());*/
+    v8::Local <v8::Function> cons = Nan::New(constructor());
 
     Nan::AsyncQueueWorker(new GetCurrentProcessWorker(
-            new Nan::Callback(info[0].As<v8::Function>())/*,
-            cons*/
+            new Nan::Callback(info[0].As<v8::Function>()),
+            cons
     ));
 };
 
@@ -116,10 +114,10 @@ int Process::mainWindowHandle() const {
     return _mainWindowHandle;
 }
 
-/*Nan::Persistent<v8::Function> &Process::constructor() {
+Nan::Persistent<v8::Function> &Process::constructor() {
     static Nan::Persistent<v8::Function> construct;
     return construct;
-};*/
+};
 
 Process::Process(int handle, int id, std::string mainWindowTitle, int mainWindowHandle) : _handle(handle), _id(id),
                                                                                           _mainWindowTitle(
@@ -143,7 +141,7 @@ NAN_METHOD(Process::New) {
         const int argc = 4;
 
         v8::Local <v8::Value> argv[argc] = {info[0], info[1], info[2], info[3]};
-        v8::Local <v8::Function> cons = Nan::New(constructor);
+        v8::Local <v8::Function> cons = Nan::New(constructor());
         info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
     }
 };
