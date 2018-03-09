@@ -2,7 +2,7 @@
 // Created by leoma on 02/03/2018.
 //
 
-#include "Process.cc"
+#include "Process.cpp"
 
 namespace AukSwitcher {
 

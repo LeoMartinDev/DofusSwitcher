@@ -5,7 +5,7 @@
 #ifndef NODEJSNATIVEADDON_PROCESSHELPER_H
 #define NODEJSNATIVEADDON_PROCESSHELPER_H
 
-#include "Process.cc"
+#include "Process.cpp"
 
 #include <iterator>
 #include <vector>

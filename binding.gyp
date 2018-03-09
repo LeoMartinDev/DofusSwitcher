@@ -6,7 +6,9 @@
       ],
       "target_name": "addon",
       "sources": [
-        "Process.cc"
+        "src/Process.cpp",
+        "src/GetCurrentProcessWorker.cpp",
+        "src/Helpers.cpp"
       ],
       "msbuild_settings": {
         "ClCompile": {

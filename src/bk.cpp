@@ -1,9 +1,11 @@
 #include "nan.h"
-#include <nan.h>
+#include "nan.h"
 #include <v8.h>
 #include <map>
+#include <exception>
 #include <msclr\marshal_cppstd.h>
 #include <windows.h>
+#include <stdexcept>
 
 #pragma unmanaged
 #using <mscorlib.dll>
@@ -54,6 +56,23 @@ namespace Helpers {
         System::Console::Write(currentProcess->MainWindowTitle);
         return result;
     }
+
+    RawProcess GetProcessById(const int id) {
+        try {
+            Diagnostics::Process ^currentProcess = Diagnostics::Process::GetProcessById(id);
+
+            std::string mainWindowTitle = msclr::interop::marshal_as<std::string>(currentProcess->MainWindowTitle);
+            RawProcess result = {
+                    currentProcess->Handle.ToInt32(),
+                    currentProcess->Id,
+                    mainWindowTitle,
+                    currentProcess->MainWindowHandle.ToInt32(),
+            };
+            return result;
+        } catch (ArgumentException^error) {
+            throw std::invalid_argument("Cannot find process for id " + std::to_string(id));
+        }
+    }
 }
 
 #pragma unmanaged
@@ -84,10 +103,14 @@ public:
         v8::Local <v8::Value> argv[argc] = {Nan::New(value.handle), Nan::New(value.id),
                                             Nan::New(value.mainWindowTitle.c_str()).ToLocalChecked(),
                                             Nan::New(value.mainWindowHandle)};
+
         info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
     };
 
     static NAN_METHOD(GetByName) {
+        if (!info[0]->IsString()) {
+            return Nan::ThrowError(Nan::New("Process::GetByName - name must be a string!").ToLocalChecked());
+        }
         v8::Local <v8::Function> cons = Nan::New(constructor());
         v8::String::Utf8Value processName(info[0]);
         std::vector <Helpers::RawProcess> value = Helpers::GetProcessesByName(std::string(*processName));
@@ -104,6 +127,39 @@ public:
         }
         info.GetReturnValue().Set(jsProcessesArray);
     };
+
+    static NAN_METHOD(GetById) {
+        if (!info[0]->IsNumber()) {
+            return Nan::ThrowError(Nan::New("Process::GetById - id must be a number!").ToLocalChecked());
+        }
+        v8::Local <v8::Function> cons = Nan::New(constructor());
+        int id = info[0]->NumberValue();
+        try {
+            Helpers::RawProcess value = Helpers::GetProcessById(id);
+            const int argc = 4;
+            v8::Local <v8::Value> argv[argc] = {Nan::New(value.handle), Nan::New(value.id),
+                                                Nan::New(value.mainWindowTitle.c_str()).ToLocalChecked(),
+                                                Nan::New(value.mainWindowHandle)};
+
+            info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
+        }
+        catch( const std::invalid_argument& e ) {
+            info.GetReturnValue().Set(Nan::Undefined());
+        }
+    };
+
+    static NAN_METHOD(GetCurrentAsync) {
+        Process* process = Nan::ObjectWrap::Unwrap<Process>(info.Holder());
+
+        v8::Local<v8::Promise::Resolver> resolver = v8::Promise::Resolver::New(info.GetIsolate());
+        Nan::Persistent<v8::Promise::Resolver> *persistent = new Nan::Persistent<v8::Promise::Resolver>(resolver);
+
+        ProcessWorker *pw = new ProcessWorker(persistent);
+        Nan::AsyncQueueWorker(pw);
+
+        info.GetReturnValue().Set(resolver->GetPromise());
+    };
+
 
     static NAN_GETTER(HandleGetters) {
         Process *self = Nan::ObjectWrap::Unwrap<Process>(info.This());
@@ -137,6 +193,11 @@ public:
     inline int mainWindowHandle() const {
         return _mainWindowHandle;
     }
+
+    static inline Nan::Persistent<v8::Function> &constructor() {
+        static Nan::Persistent<v8::Function> construct;
+        return construct;
+    };
 
 private:
     explicit Process(int handle, int id, std::string mainWindowTitle, int mainWindowHandle) : _handle(handle), _id(id),
@@ -172,10 +233,7 @@ private:
         SetForegroundWindow((HWND) obj->_mainWindowHandle);
     };
 
-    static inline Nan::Persistent<v8::Function> &constructor() {
-        static Nan::Persistent<v8::Function> construct;
-        return construct;
-    };
+
 
     int _handle;
     int _id;
@@ -183,9 +241,46 @@ private:
     int _mainWindowHandle;
 };
 
+class ProcessWorker : public Nan::AsyncWorker {
+public:
+    ProcessWorker(Nan::Persistent<v8::Promise::Resolver> *persistent): AsyncWorker(callback) {};
+    ~ProcessWorker() {};
+
+    void Execute() {
+        v8::Local <v8::Function> cons = Nan::New(Process::constructor());
+        Helpers::RawProcess value = Helpers::GetCurrentProcess();
+        const int argc = 4;
+        v8::Local <v8::Value> argv[argc] = {Nan::New(value.handle), Nan::New(value.id),
+                                            Nan::New(value.mainWindowTitle.c_str()).ToLocalChecked(),
+                                            Nan::New(value.mainWindowHandle)};
+
+        _result = Nan::NewInstance(cons, argc, argv).ToLocalChecked();
+    };
+
+    void HandleOKCallback () {
+        Nan::HandleScope scope;
+        v8::Local<v8::Value> argv[2] = { Nan::Null(), Nan::Null() };
+        argv[1] = _result;
+        callback->Call(2, argv);
+    };
+
+private:
+    v8::Local <v8::Object> _result;
+    Nan::Persistent<v8::Promise::Resolver> *_persistent;
+};
 
 NAN_MODULE_INIT(Init) {
     Process::Init(target);
+    Nan::Set(target,
+             Nan::New<v8::String>("getProcessById").ToLocalChecked(),
+             Nan::GetFunction(
+                     Nan::New<v8::FunctionTemplate>(Process::GetById)).ToLocalChecked()
+    );
+    Nan::Set(target,
+             Nan::New<v8::String>("getCurrentProcessAsync").ToLocalChecked(),
+             Nan::GetFunction(
+                     Nan::New<v8::FunctionTemplate>(Process::GetCurrentAsync)).ToLocalChecked()
+    );
     Nan::Set(target,
              Nan::New<v8::String>("getCurrentProcess").ToLocalChecked(),
              Nan::GetFunction(

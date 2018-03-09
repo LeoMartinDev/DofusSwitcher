@@ -1,7 +1,7 @@
 #ifndef NATIVE_EXTENSION_GRAB_W
 #define NATIVE_EXTENSION_GRAB_W
 
-#include <nan.h>
+#include "nan.h"
 #include <windows.h>
 
 class Window : public Nan::ObjectWrap {
