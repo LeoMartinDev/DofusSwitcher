@@ -18,9 +18,11 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: (72 * 6) + 56 ,
     useContentSize: true,
-    width: 1000,
+    width: 400,
+    frame: false,
+    resizable: false,
   });
 
   mainWindow.loadURL(winURL);
@@ -42,6 +44,10 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+process.on('uncaughtException', function (error) {
+  console.error(error)
 });
 
 /**
