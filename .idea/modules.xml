@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DofusSwitcher.iml" filepath="$PROJECT_DIR$/.idea/DofusSwitcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/DofusSwitcherElectron.iml" filepath="$PROJECT_DIR$/.idea/DofusSwitcherElectron.iml" />
     </modules>
   </component>
 </project>
