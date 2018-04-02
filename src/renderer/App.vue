@@ -15,7 +15,6 @@
                                      :disabled="dialogs[DIALOG.TERMINATE_ALL]">
                             <v-list-tile-title>Fermer les processus</v-list-tile-title>
                         </v-list-tile>
-                        <!-- TODO confirm popup-->
                         <v-list-tile @click="toggleDialog(DIALOG.REPAIR)" :disabled="dialogs[DIALOG.REPAIR]">
                             <v-list-tile-title>Réparer Dofus</v-list-tile-title>
                         </v-list-tile>
@@ -24,7 +23,7 @@
                         </v-list-tile>
                     </v-list>
                 </v-menu>
-                <v-toolbar-title>Inbox</v-toolbar-title>
+                <v-toolbar-title>Keilite</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon medium class="no-drag" @click="minimize()" style="margin-right:0">
                     <v-icon color="white">minimize</v-icon>
@@ -57,7 +56,7 @@
                 <v-card>
                     <v-card-title class="headline">Réparer Dofus ?</v-card-title>
                     <v-card-text>
-                        Attention, toutes es instances de Dofus seront fermées et
+                        Attention, toutes les instances de Dofus seront fermées et
                         vos paramètres de jeu seront réinitialisés !
                     </v-card-text>
                     <v-card-actions>
@@ -80,16 +79,45 @@
 <script>
   import {remote} from 'electron';
   import {getProcessesByNameAsync} from 'windows-process';
-  import {mapGetters, mapMutations, mapActions} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
   import * as fs from 'fs-extra';
   import * as path from 'path';
-  import v4 from 'uuid';
   import {DIALOG} from "./store/modules/UI";
   import CharacterSettings from './components/CharacterSettings';
+  import DofusWindowsEvent from "./components/DofusWindowsEvent";
+  import {throttle} from 'lodash';
 
   export default {
     name: 'keilite',
     components: {CharacterSettings},
+    created() {
+      const dofusEvents = new DofusWindowsEvent();
+      const _focusPreviousProcess = throttle(this.focusPreviousProcess, 100);
+      const _focusNextProcess = throttle(this.focusNextProcess, 100);
+
+      dofusEvents.on('login', process => {
+        this.addProcess(process);
+        if (!this.focusedProcess) {
+          this.updateFocusedProcess(process);
+        }
+      });
+      dofusEvents.on('logout', process => {
+        this.removeProcess(process);
+      });
+      dofusEvents.on('close', process => {
+        this.removeProcess(process);
+      });
+      remote.globalShortcut.register('CommandOrControl+s', () => {
+        if (!this.isLocked) {
+          _focusNextProcess();
+        }
+      });
+      remote.globalShortcut.register('CommandOrControl+q', () => {
+        if (!this.isLocked) {
+          _focusPreviousProcess();
+        }
+      });
+    },
     computed: {
       ...mapGetters([
         'dialogs'
@@ -101,18 +129,20 @@
       };
     },
     methods: {
-      ...mapMutations([
-        'REMOVE_ALL_PROCESSES',
-        'ADD_TEAM',
-      ]),
       ...mapActions([
         'updateDialog',
         'toggleDialog',
         'closeConnectedProcesses',
+        'updateFocusedProcess',
+        'removeProcesses',
+        'updateProcesses',
+        'addProcess',
+        'removeProcess',
+        'editProcess',
+        'focusProcess',
+        'focusPreviousProcess',
+        'focusNextProcess',
       ]),
-      /*      addTeam() {
-              this.ADD_TEAM({ id: v4() });
-            },*/
       terminateAll() {
         getProcessesByNameAsync("Dofus")
           .then(processes => {
@@ -152,7 +182,7 @@
     }
 
     .content {
-        max-height: 100vh;
+        height: 100vh;
     }
 
     .scroll-container {

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex';
+  import {mapMutations} from 'vuex';
   import draggable from 'vuedraggable';
 
   export default {

@@ -32,9 +32,9 @@
 </template>
 
 <script>
-    import SystemInformation from './LandingPage/SystemInformation';
+  import SystemInformation from './LandingPage/SystemInformation';
 
-    export default {
+  export default {
       name: 'landing-page',
       components: { SystemInformation },
       methods: {

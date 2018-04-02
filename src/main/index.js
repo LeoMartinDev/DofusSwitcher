@@ -46,10 +46,6 @@ app.on('activate', () => {
   }
 });
 
-process.on('uncaughtException', function (error) {
-  console.error(error)
-});
-
 /**
  * Auto Updater
  *

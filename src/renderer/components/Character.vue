@@ -5,13 +5,18 @@
             <img v-else src="/static/images/avatars/default.png">
         </v-list-tile-avatar>
         <v-list-tile-content>
-            <v-list-tile-title style="font-weight: bold;" v-text="process.mainWindowTitle"></v-list-tile-title>
+            <v-list-tile-title style="font-weight: bold;">{{ process.mainWindowTitle | toCharacterName }}</v-list-tile-title>
         </v-list-tile-content>
-        <v-list-tile-content v-if="character.initiative">
+<!--         <v-list-tile-content v-if="character.initiative">
             <v-chip disabled style="font-weight: bold;">{{ character.initiative }}</v-chip>
-        </v-list-tile-content>
+        </v-list-tile-content> -->
         <v-list-tile-action>
-            <v-btn icon ripple @click.native="focusProcess(process.id)">
+            <v-switch
+                    v-model="isDisabled"
+            ></v-switch>
+        </v-list-tile-action>
+        <v-list-tile-action>
+            <v-btn icon ripple @click.native="focusProcess(process)">
                 <v-icon color="grey">open_in_browser</v-icon>
             </v-btn>
         </v-list-tile-action>
@@ -40,40 +45,48 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
-  export default {
-    name: "character",
-    props: {
-      process: {
-        required: true,
-      },
+export default {
+  name: "character",
+  props: {
+    process: {
+      required: true
+    }
+  },
+  methods: {
+    ...mapActions([
+      "updateFocusedProcess",
+      "removeProcesses",
+      "updateProcesses",
+      "addProcess",
+      "removeProcess",
+      "editProcess",
+      "focusProcess",
+      "focusPreviousProcess",
+      "focusNextProcess",
+      "terminateProcess",
+      "toggleAccessiblity"
+    ]),
+    tileClick() {}
+  },
+  computed: {
+    character() {
+      return (
+        this.$store.getters.getCharacterByName(this.process.mainWindowTitle) ||
+        {}
+      );
     },
-    methods: {
-      ...mapActions([
-        'updateFocusedProcess',
-        'removeProcesses',
-        'updateProcesses',
-        'addProcess',
-        'removeProcess',
-        'editProcess',
-        'focusProcess',
-        'focusPreviousProcess',
-        'focusNextProcess',
-        'terminateProcess',
-      ]),
-      tileClick() {
-        console.log('process : ', this.process);
-        console.log('character : ', this.character);
+    isDisabled: {
+      get() {
+        return !this.process.disabled;
       },
-    },
-    computed: {
-      character() {
-        console.log(this.$store.getters.getCharacterByName(this.process.name));
-        return this.$store.getters.getCharacterByName(this.process.mainWindowTitle) || {};
+      set() {
+        this.toggleAccessiblity(this.process);
       }
     }
   }
+};
 </script>
 
 <style scoped>

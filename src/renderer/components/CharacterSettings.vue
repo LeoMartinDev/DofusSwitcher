@@ -55,6 +55,8 @@
 
 <script>
   import * as _ from 'lodash';
+  import {mapActions} from 'vuex';
+  import {DIALOG} from "../store/modules/UI";
 
   const classNames = ["feca", "osamodas", "enutrof", "sram", "xelor", "ecaflip", "eniripsa", "iop", "cra", "sadida", "sacrieur", "pandawa", "roublard", "zobal", "steameur", "eliotrope", "huppermage", "ouginak"];
   const characters = classNames.reduce((accumulator, element) => {
@@ -72,9 +74,6 @@
     });
     return accumulator;
   }, []);
-
-  import {mapGetters, mapMutations, mapActions} from 'vuex';
-  import {DIALOG} from "../store/modules/UI";
 
   export default {
     name: "character-settings",

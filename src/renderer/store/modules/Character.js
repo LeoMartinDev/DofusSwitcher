@@ -1,4 +1,3 @@
-import {DIALOG} from "./UI";
 import * as _ from 'lodash';
 
 const state = {
@@ -8,13 +7,11 @@ const state = {
 const mutations = {
   ADD_CHARACTER: (state, payload) => {
     let index = state.characters.findIndex(c => c.name === payload.name);
-    console.log('ADD_CHARACTER : ', index);
     if (index < 0) {
       let storage = JSON.parse(localStorage.getItem('characters')) || [];
       storage.push(payload);
 
       localStorage.setItem('characters', JSON.stringify(storage));
-      console.log('ADD_CHARACTER : ', payload);
       state.characters.push(payload);
     }
   },
@@ -22,7 +19,6 @@ const mutations = {
     let index = state.characters.findIndex(c => c.name === payload.name);
 
     if (index > -1) {
-      console.log('UPDATE_CHARACTER : ', payload);
       let storage = JSON.parse(localStorage.getItem('characters')) || [];
       let storageIndex = storage.findIndex(c => c.name === payload.name);
 
@@ -69,11 +65,9 @@ const actions = {
     }
   },
   disconnectCharacter({commit, state, dispatch, getters}, process) {
-    console.log('Character.js disconnectCharacter : ', process);
     let character = getters.getCharacterById(process.id);
 
     if (character) {
-      console.log('character : ', character);
 
       commit('UPDATE_CHARACTER', _.merge({}, character, {
         startedAt: '',
