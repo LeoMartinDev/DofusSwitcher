@@ -72,9 +72,7 @@ const actions = {
   },
   editProcess({commit, state, dispatch}, process) {
     commit('UPDATE_EDITING_PROCESS', process);
-    if (state.editingProcessId !== null) {
-      dispatch('toggleDialog', DIALOG.PROCESS_SETTINGS);
-    }
+    dispatch('toggleDialog', DIALOG.PROCESS_SETTINGS);
   },
   focusProcess({commit, state, getters}, process) {
     if (process && process.id !== state.focusedProcessId) {
@@ -150,7 +148,8 @@ const getters = {
   editingProcessId: (state) => state.editingProcessId,
   editingProcess: (state, getters) => getters.processes.find(p => p.id === getters.editingProcessId),
   byId: (state, getters) => id => getters.processes.find(p => p.id === id),
-  processByName: (state, getters) => name => getters.processes.find(p => p.name === name),
+  processByWindowTitle: (state, getters) => windowTitle => getters.processes.find(p => p.mainWindowTitle === windowTitle),
+  processByWindowTitleQuery: (state, getters) => query => getters.processes.find(p => p.mainWindowTitle.includes(query)),
 };
 
 export default {

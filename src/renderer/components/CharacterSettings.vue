@@ -46,6 +46,7 @@
                     <v-text-field
                             label="Initiative"
                             v-model="initiative"
+                            mask="####"
                     ></v-text-field>
                 </v-form>
             </v-container>
@@ -139,6 +140,7 @@
         this.toggleDialog(DIALOG.PROCESS_SETTINGS);
       },
       save() {
+        console.log('editing character : ', this.$store.getters.editingCharacter)
         this.updateCharacter(_.merge({}, this.$store.getters.editingCharacter, this.formValue));
         this.close();
       }
