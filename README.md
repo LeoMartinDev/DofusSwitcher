@@ -1,25 +1,8 @@
-# keilite
+# Keilite
 
-> An electron-vue project
+> Keilite est un utilitaire pour le jeu [**Dofus**](https://www.dofus.com/fr) permettant de changer rapidement de compte grace à des raccourcis clavier.
+Il a donc pour but de remplacer le raccourcis Windows `alt+echap` ou des utilitaires comme Mininit ou Organizer.
 
-#### Build Setup
+# Preview
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:9080
-npm run dev
-
-# build electron application for production
-npm run build
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
-
-```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+![Keilite preview](https://media.giphy.com/media/xlcWYfiRjTuJ5JBKDl/giphy.gif)

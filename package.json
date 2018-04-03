@@ -1,8 +1,8 @@
 {
   "name": "keilite",
-  "version": "0.1.14",
+  "version": "0.1",
   "author": "Léo MARTIN <leo1.martin@epitech.eu>",
-  "description": "An electron-vue project",
+  "description": "Keilite est une alternative à Mininit et Organizer, deux utilitaires pour le jeu Dofus.",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
