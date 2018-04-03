@@ -17,7 +17,8 @@
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "npm run lint:fix && electron-builder install-app-deps",
-    "install": "./node_modules/.bin/electron-rebuild"
+    "install": "./node_modules/.bin/electron-rebuild",
+    "release": "build"
   },
   "build": {
     "productName": "Keilite",
