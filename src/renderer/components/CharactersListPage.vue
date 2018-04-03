@@ -31,14 +31,13 @@
 <script>
   import draggable from 'vuedraggable';
   import {mapActions, mapGetters} from 'vuex';
-  import TeamList from './TeamList';
   import ProcessSettings from './CharacterSettings';
   import DisconnectedCharacter from './DisconnectedCharacter';
   import ConnectedCharacter from './ConnectedCharacter';
 
   export default {
     name: 'characters-list-page',
-    components: {draggable, TeamList, ProcessSettings, DisconnectedCharacter, ConnectedCharacter},
+    components: {draggable, ProcessSettings, DisconnectedCharacter, ConnectedCharacter},
     methods: {
         ...mapActions([
             'updateProcesses',

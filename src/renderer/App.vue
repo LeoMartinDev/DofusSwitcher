@@ -84,7 +84,7 @@
   import * as path from 'path';
   import {DIALOG} from "./store/modules/UI";
   import CharacterSettings from './components/CharacterSettings';
-  import DofusWindowsEvent from "./components/DofusWindowsEvent";
+  import DofusWindowsEvent from "./libs/DofusWindowsEvent";
   import {throttle} from 'lodash';
 
   export default {

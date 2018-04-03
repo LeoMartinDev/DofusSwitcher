@@ -140,7 +140,6 @@
         this.toggleDialog(DIALOG.PROCESS_SETTINGS);
       },
       save() {
-        console.log('editing character : ', this.$store.getters.editingCharacter)
         this.updateCharacter(_.merge({}, this.$store.getters.editingCharacter, this.formValue));
         this.close();
       }

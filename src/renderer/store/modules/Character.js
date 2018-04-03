@@ -16,7 +16,6 @@ const state = {
 const mutations = {
   ADD_CHARACTER: (state, payload) => {
     let index = state.characters.findIndex(c => c.name === payload.name);
-    console.log('ADD_CHARACTER : ', payload);
     if (index < 0) {
       let storage = JSON.parse(localStorage.getItem('characters')) || [];
 
@@ -29,14 +28,12 @@ const mutations = {
     state.editingCharacter = payload.name;
   },
   UPDATE_CHARACTER: (state, payload) => {
-    console.log('payload.name : ', payload)
     let index = state.characters.findIndex(c => c.name === payload.name);
 
-    console.log(index);
     if (index > -1) {
       let storage = JSON.parse(localStorage.getItem('characters')) || [];
       let storageIndex = storage.findIndex(c => c.name === payload.name);
-      console.log(storageIndex);
+
       storage[storageIndex] = payload;
       localStorage.setItem('characters', JSON.stringify(storage));
       state.characters.splice(index, 1, payload);
@@ -92,11 +89,9 @@ const actions = {
     }
   },
   addCharacter({commit, state, dispatch}, character) {
-    console.log('addCharacter', character);
     commit('ADD_CHARACTER', character);
   },
   updateCharacter({commit, state, dispatch}, character) {
-    console.log('updating character : ', character)
     commit('UPDATE_CHARACTER', character);
   },
   upsertCharacter({commit, state, dispatch, getters}, character) {
