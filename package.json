@@ -49,7 +49,8 @@
     },
     "win": {
       "compression": "maximum",
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/icon.ico",
+      "publish": "github"
     },
     "linux": {
       "compression": "maximum",
