@@ -2,13 +2,18 @@ export const DIALOG = {
   TERMINATE_ALL: 'terminateAll',
   REPAIR: 'repair',
   PROCESS_SETTINGS: 'processSettings',
+  FIRST_START: 'firstStart',
 };
 
+const firstStart = localStorage.getItem('firstStart') === undefined || (localStorage.getItem('firstStart') === "true");
+
 const state = {
+  firstStart,
   dialogs: {
     [DIALOG.TERMINATE_ALL]: false,
     [DIALOG.REPAIR]: false,
     [DIALOG.PROCESS_SETTINGS]: false,
+    [DIALOG.FIRST_START]: firstStart,
   },
 };
 
@@ -21,8 +26,11 @@ const mutations = {
 };
 
 const actions = {
-  updateDialog({ commit, state }, payload) {
-    commit('UPDATE_DIALOG', payload);
+  updateDialog({ commit, state }, { dialog, value }) {
+    if (dialog === DIALOG.FIRST_START) {
+        localStorage.setItem('firstStart', value);
+    }
+    commit('UPDATE_DIALOG', { dialog, value });
   },
   toggleDialog({ commit, state }, payload) {
     if (state.dialogs[payload] !== null) {

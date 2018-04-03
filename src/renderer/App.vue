@@ -72,6 +72,22 @@
                       :overlay="false">
                 <character-settings></character-settings>
             </v-dialog>
+            <v-dialog v-model="dialogs[DIALOG.FIRST_START]" transition="dialog-bottom-transition"
+                      :overlay="false">
+                <v-card>
+                    <v-card-title class="headline">Utilisation</v-card-title>
+                    <v-card-text>
+                        L'application est encore en développement, vous pouvez remonter les bugs sur https://github.com/LeoMartinDev/Keilite
+                        Les raccourcis ne sont pas encore modifiables.
+                        Suivant: <kbd><kbd>Ctrl</kbd>+<kbd>s</kbd></kbd>
+                        Précédent: <kbd><kbd>Ctrl</kbd>+<kbd>q</kbd></kbd>
+                    </v-card-text>
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green darken-1" flat="flat" @click="updateDialog({dialog: DIALOG.FIRST_START, value: false })">OK!</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-app>
     </div>
 </template>
@@ -125,7 +141,7 @@
     },
     data() {
       return {
-        DIALOG
+        DIALOG,
       };
     },
     methods: {
